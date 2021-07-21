@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "nine.h"
+#include<algorithm>
 
 using namespace std;
 
@@ -65,9 +66,26 @@ int main()
     // cout << s << endl;
 
     //9.45
-    string s = "xiaowang";
-    func9_46(s,"Mr","Jr.");
-    cout << s <<endl;
+    // string s = "xiaowang";
+    // func9_46(s,"Mr","Jr.");
+    // cout << s <<endl;
+
+    //9.49
+    // string target;
+    // target = func9_49("temp9.txt");
+    // if(target.size() > 0){
+    //         cout << target << endl;
+    // }else
+    //     cout << "can't find the character" << endl;
+
+    //9.51
+    date d1{"January 2,1900"};
+    date d2{"1/2/1900"};
+    date d3{"Jan 2 1900"};
+    d1.prinfDate();
+    d2.prinfDate();
+    d3.prinfDate();
+
 
     return 0;
 }

@@ -1,0 +1,1 @@
+Notice that it  enough for  single  of the sequence to match (not  of them).  string::find for  function that matches entire sequences.

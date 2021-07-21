@@ -3,6 +3,7 @@
 #include <vector>
 #include <list>
 #include <deque>
+#include <fstream>
 
 using namespace std;
 
@@ -83,4 +84,93 @@ void func9_45(string &s, const string& preS,const string& afterS){
 void func9_46(string &s, const string& preS,const string& afterS){
     s.insert(0,preS);
     s.insert(s.size(),afterS);
+}
+
+string func9_49(const string &filePath){
+    const string sAscend = "bdfhk";
+    const string sDscend = "gjpqtyFJLTY";
+    ifstream ifs(filePath);
+    string buf;
+    string target;
+    size_t maxSize = 0;
+
+    if(ifs){
+        while(ifs >> buf){
+            if( buf.find_first_of(sAscend) == string::npos && buf.find_first_of(sDscend) == string::npos)
+            {
+                if(buf.size() > maxSize){
+                    maxSize = buf.size();
+                    target = buf;
+                }
+            }
+        }
+
+        
+    }
+
+    return target;
+
+}
+
+struct date{
+    private:
+        unsigned year,month,day;
+
+        void converseOne(const string &s);
+        void converseTwo(const string &s);
+        void converseThree(const string &s);
+        unsigned monthToNum(const string &s);
+    public:
+        date(const string &s){
+            if(s.find_first_of(",")!=string::npos){
+                converseOne(s);
+            }else if(s.find_first_of("/")!=string::npos){
+                converseTwo(s);
+            }else if(s.find_first_of(" ")!=string::npos){
+                converseThree(s);
+            }else{
+                cout << "the input date is wrong, new date failed " << endl;
+            }
+    }    
+        void prinfDate();
+};
+
+void date::prinfDate(){
+    cout << "Date is: " << endl; 
+    cout << "year:" << year << " month:" << month << " day:" << day <<endl;
+}
+
+void date::converseOne(const string &s){
+    year = stoi(s.substr(s.find_first_of(",")+1,4));
+    month = monthToNum(s);
+    day = stoi(s.substr(s.find_first_of("1234567890"),s.find_first_of(",")-s.rfind("/")));
+}
+
+void date::converseTwo(const string &s){
+    year = stoi(s.substr(s.rfind("/")+1,4));
+    day = stoi(s.substr(s.find("/")+1,s.rfind("/")-s.find("/")));
+    month = stoi(s.substr(0,s.find_first_of("/")));
+}
+
+void date::converseThree(const string &s){
+    year = stoi(s.substr(s.find_last_of(" ")+1,4));
+    month = monthToNum(s);
+    day = stoi(s.substr(s.find_first_of(" ")+1,s.find_last_of(" ")-s.find_first_of(" ")));
+}
+
+unsigned date::monthToNum(const string &s){
+    if(s.find_first_of("Jan")!=string::npos) return 1;
+    else if(s.find_first_of("Feb")!=string::npos) return 2;
+    else if(s.find_first_of("Mar")!=string::npos) return 3;
+    else if(s.find_first_of("Apr")!=string::npos) return 4;
+    else if(s.find_first_of("May")!=string::npos) return 5;
+    else if(s.find_first_of("Jun")!=string::npos) return 6;
+    else if(s.find_first_of("Jul")!=string::npos) return 7;
+    else if(s.find_first_of("Aug")!=string::npos) return 8;
+    else if(s.find_first_of("Sep")!=string::npos) return 9;
+    else if(s.find_first_of("Oct")!=string::npos) return 10;
+    else if(s.find_first_of("Nov")!=string::npos) return 11;
+    else if(s.find_first_of("Dec")!=string::npos) return 12;
+
+    return 100;
 }
