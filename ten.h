@@ -3,8 +3,11 @@
 #include <string>
 #include <iterator>
 #include <iostream>
+#include <functional>
+
 
 using namespace std;
+using namespace std::placeholders;
 
 
 void func10_9(vector<string> &words){
@@ -39,3 +42,23 @@ void func10_13(vector<string> &words){
 //10.14
 auto f = [](int i,int j){return i+j;};
 // auto h = [i](int j){return i+j;};
+
+//10.16
+void elimdups(vector<string>& vs){
+    sort(vs.begin(),vs.end());
+    auto new_end = unique(vs.begin(),vs.end());
+    vs.erase(new_end,vs.end());
+}
+
+void biggies(vector<string>& vs, size_t sz){
+    elimdups(vs);
+    stable_sort(vs.begin(),vs.end(),[](string const& s1, string const& s2){return s1.size()<s2.size();});
+    auto wc = find_if(vs.begin(),vs.end(),[sz](string const& s){return s.size() >= sz;});
+    for_each(wc,vs.end(),[](string const&s){cout << s <<" ";});
+}
+
+bool check_size(int i, string s){
+    return  i > s.size();
+}
+
+

@@ -16,5 +16,5 @@ class Quote{
     private:
     string bookNo;
     protected:
-    double price = 0.0; 
+    double price = 0.0;     
 };
