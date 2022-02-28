@@ -3,6 +3,7 @@
 #include <vector>
 #include "nine.h"
 #include<algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -79,13 +80,38 @@ int main()
     //     cout << "can't find the character" << endl;
 
     //9.51
-    date d1{"January 2,1900"};
-    date d2{"1/2/1900"};
-    date d3{"Jan 2 1900"};
-    d1.prinfDate();
-    d2.prinfDate();
-    d3.prinfDate();
+    // date d1{"January 2,1900"};
+    // date d2{"1/2/1900"};
+    // date d3{"Jan 2 1900"};
+    // d1.prinfDate();
+    // d2.prinfDate();
+    // d3.prinfDate();
 
 
+    // const char *p = "SignalGenerator\0SpectralSignalProcessing\0CursorTask\0";
+    // std::vector<std::string> modules;
+    // while (*p)
+    // {
+    //     modules.push_back(p);
+    //     p += modules.back().length() + 1;
+    //     cout << modules.back().length() << endl;
+    // }
+    // for(int i = 0; i != modules.size(); i++){
+    //     cout <<"index: " << i << " " << modules[i] <<endl;
+    // }
+    // float top = 0.489f;//0.47f;
+    // float bottom = 0.511f;//0.53f;
+    // float fixation_cross_center = top + ( bottom - top)/2;
+
+    // cout << fixation_cross_center <<endl;
+
+  chrono::steady_clock sc;   // create an object of `steady_clock` class
+   auto start = sc.now();     // start timer
+
+   // do stuff....
+
+   auto end = sc.now();       // end timer (starting & ending is done by measuring the time at the moment the process started & ended respectively)
+   auto time_span = static_cast<chrono::duration<double>>(end - start);   // measure time span between start & end
+   cout<<"Operation took: "<<time_span.count()<<" seconds !!!";
     return 0;
 }
